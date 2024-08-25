@@ -1,7 +1,6 @@
 from request_data import *
 from requests_ntlm import HttpNtlmAuth
 from urllib.parse import unquote
-import datetime
 
 def parse_cookies(cookie_header: str) -> dict:
     cookies = {}
@@ -47,7 +46,7 @@ class Skola24Session():
         skola_signin = skola24_signin(sign_in_url.split("?t=",1)[1], self.skola_cookies)
         print("signed in to skola24")
 
-    def get_timetable(self):
+    def get_timetable(self, week_number, width, height, day):
         years = timetable_years(self.skola_cookies)
         timetables = timetable_timetables(self.skola_cookies)
         key = timetable_key(self.skola_cookies)
@@ -56,7 +55,6 @@ class Skola24Session():
         timetables_data = timetables.json()
         key_data = key.json()
         print("got timetable data")
-        week_number = datetime.date.today().isocalendar()[1]
-        timetable_data = timetable(self.skola_cookies, years_data, timetables_data, key_data, week_number, 500, 500, 0)
+        timetable_data = timetable(self.skola_cookies, years_data, timetables_data, key_data, week_number, width, height, day)
         print("got timetable")
         return timetable_data.json()
