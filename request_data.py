@@ -41,7 +41,6 @@ def second_skolportal(cookies):
         'Sec-Fetch-Mode': 'navigate',
         'Sec-Fetch-User': '?1',
         'Sec-Fetch-Dest': 'document',
-        # 'Accept-Encoding': 'gzip, deflate, br',
         'Priority': 'u=0, i',
         'Connection': 'keep-alive',
     }
@@ -67,7 +66,6 @@ def third_skolportal(cookies, session):
         'Sec-Fetch-Mode': 'navigate',
         'Sec-Fetch-User': '?1',
         'Sec-Fetch-Dest': 'document',
-        # 'Accept-Encoding': 'gzip, deflate, br',
         'Priority': 'u=0, i',
         'Connection': 'keep-alive',
     }
@@ -93,7 +91,6 @@ def home_skolportal(cookies):
         'Sec-Ch-Ua-Mobile': '?0',
         'Sec-Ch-Ua-Platform': '"Windows"',
         'Accept-Language': 'en-GB',
-        # 'Accept-Encoding': 'gzip, deflate, br',
         'Priority': 'u=0, i',
         'Connection': 'keep-alive',
     }
@@ -114,7 +111,6 @@ def me_skolportal(cookies):
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Dest': 'empty',
         'Referer': 'https://skolportal.uppsala.se/wa/desktop.html',
-        # 'Accept-Encoding': 'gzip, deflate, br',
         'Priority': 'u=1, i',
         'Connection': 'keep-alive',
     }
@@ -143,7 +139,6 @@ def first_skola24():
         'Sec-Fetch-User': '?1',
         'Sec-Fetch-Dest': 'document',
         'Referer': 'https://skolportal.uppsala.se/',
-        # 'Accept-Encoding': 'gzip, deflate, br',
         'Priority': 'u=0, i',
         'Connection': 'keep-alive',
     }
@@ -165,10 +160,8 @@ def second_skola24(cookies):
         'Sec-Ch-Ua-Platform': '"Windows"',
         'Accept-Language': 'en-GB',
         'Referer': 'https://skolportal.uppsala.se/',
-        # 'Accept-Encoding': 'gzip, deflate, br',
         'Priority': 'u=0, i',
         'Connection': 'keep-alive',
-        # 'Cookie': 'ASP.NET_SessionId=h4vq5aa0lx1pfblht5oivw0z; TS016a92e6=01b91fe1da2a49598dea1f083a643e91cbec4a480f8170d215d8f47fe209280318797f90449ff7c03ea8bbe3960177d19502148c19; TS013319cd=01b91fe1da2db0414764f98e452f1d4b2a01fd8ca88170d215d8f47fe209280318797f9044877fc5725d7cd9430c3f00a7611fec71682782772b3a4e09088443939857578d',
     }
 
     params = {
@@ -192,10 +185,8 @@ def third_skola24(cookies):
         'Sec-Ch-Ua-Platform': '"Windows"',
         'Accept-Language': 'en-GB',
         'Referer': 'https://skolportal.uppsala.se/',
-        # 'Accept-Encoding': 'gzip, deflate, br',
         'Priority': 'u=0, i',
         'Connection': 'keep-alive',
-        # 'Cookie': 'ASP.NET_SessionId=h4vq5aa0lx1pfblht5oivw0z; TS016a92e6=01b91fe1da2a49598dea1f083a643e91cbec4a480f8170d215d8f47fe209280318797f90449ff7c03ea8bbe3960177d19502148c19; TS013319cd=01b91fe1da2db0414764f98e452f1d4b2a01fd8ca88170d215d8f47fe209280318797f9044877fc5725d7cd9430c3f00a7611fec71682782772b3a4e09088443939857578d',
     }
 
     return requests.get('https://uppsala-sso.skola24.se/', cookies=cookies, headers=headers, verify=False, allow_redirects=False)
@@ -214,10 +205,8 @@ def skola24_login(cookies):
         'Sec-Fetch-Mode': 'navigate',
         'Sec-Fetch-Dest': 'iframe',
         'Referer': 'https://uppsala-sso.skola24.se/',
-        # 'Accept-Encoding': 'gzip, deflate, br',
         'Priority': 'u=0, i',
         'Connection': 'keep-alive',
-        # 'Cookie': 'ASP.NET_SessionId=h4vq5aa0lx1pfblht5oivw0z; TS016a92e6=01b91fe1da2a49598dea1f083a643e91cbec4a480f8170d215d8f47fe209280318797f90449ff7c03ea8bbe3960177d19502148c19; TS013319cd=01b91fe1da2db0414764f98e452f1d4b2a01fd8ca88170d215d8f47fe209280318797f9044877fc5725d7cd9430c3f00a7611fec71682782772b3a4e09088443939857578d',
     }
 
     params = {
@@ -247,7 +236,6 @@ def first_skola24_saml():
         'Sec-Fetch-Mode': 'navigate',
         'Sec-Fetch-Dest': 'document',
         'Referer': 'https://uppsala-sso.skola24.se/',
-        # 'Accept-Encoding': 'gzip, deflate, br',
         'Priority': 'u=0, i',
         'Connection': 'keep-alive',
     }
@@ -261,7 +249,6 @@ def first_skola24_saml():
 def second_skola24_saml(cookies, saml_data):
     headers = {
         'Host': 'skolfederation.uppsala.se',
-        # 'Content-Length': '3784',
         'Cache-Control': 'max-age=0',
         'Sec-Ch-Ua': '"Chromium";v="127", "Not)A;Brand";v="99"',
         'Sec-Ch-Ua-Mobile': '?0',
@@ -276,10 +263,8 @@ def second_skola24_saml(cookies, saml_data):
         'Sec-Fetch-Mode': 'navigate',
         'Sec-Fetch-Dest': 'document',
         'Referer': 'https://service-sso1.novasoftware.se/',
-        # 'Accept-Encoding': 'gzip, deflate, br',
         'Priority': 'u=0, i',
         'Connection': 'keep-alive',
-        # 'Cookie': 'WASID_HAG_SN=814956c1cdb8faba; WAAK_HAG_SN=a60e19262621581cc3582f07ae0d8aa5; UPD=2',
     }
 
     data = {
@@ -299,7 +284,6 @@ def third_skola24_saml(saml_data):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.5',
-        # 'Accept-Encoding': 'gzip, deflate, br, zstd',
         'Content-Type': 'application/x-www-form-urlencoded',
         'Origin': 'https://skolfederation.uppsala.se',
         'DNT': '1',
@@ -324,12 +308,10 @@ def skola24_signin(t, cookies):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.5',
-        # 'Accept-Encoding': 'gzip, deflate, br, zstd',
         'Referer': 'https://skolfederation.uppsala.se/',
         'DNT': '1',
         'Sec-GPC': '1',
         'Connection': 'keep-alive',
-        # 'Cookie': 'ASP.NET_SessionId=llcxoerum55nvpqsu2ind0ws; TS013319cd=01b91fe1daa70b42e065d9e24952402951a73875395f2bd8ae8e743bb87f4fd62e40fe2e1962345845367584a1bbddc590b357212d7d49c250a922173d4f9aa10f5c7f987a',
         'Upgrade-Insecure-Requests': '1',
         'Sec-Fetch-Dest': 'document',
         'Sec-Fetch-Mode': 'navigate',
@@ -348,9 +330,6 @@ def skola24_info(cookies):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0',
         'Accept': 'application/json, text/javascript, */*; q=0.01',
         'Accept-Language': 'en-US,en;q=0.5',
-        # 'Accept-Encoding': 'gzip, deflate, br, zstd',
-        # Already added when you pass json=
-        # 'Content-Type': 'application/json',
         'X-Scope': 'a0b6c9c4-11d7-4a52-a030-a55a15058eef',
         'X-Requested-With': 'XMLHttpRequest',
         'Origin': 'https://web.skola24.se',
@@ -358,7 +337,6 @@ def skola24_info(cookies):
         'Sec-GPC': '1',
         'Connection': 'keep-alive',
         'Referer': 'https://web.skola24.se/portal/start/',
-        # 'Cookie': 'ASP.NET_SessionId=llcxoerum55nvpqsu2ind0ws; TS013319cd=01b91fe1daa70b42e065d9e24952402951a73875395f2bd8ae8e743bb87f4fd62e40fe2e1962345845367584a1bbddc590b357212d7d49c250a922173d4f9aa10f5c7f987a',
         'Sec-Fetch-Dest': 'empty',
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
@@ -373,7 +351,6 @@ def timetable_years(cookies):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0',
         'Accept': 'application/json, text/javascript, */*; q=0.01',
         'Accept-Language': 'en-US,en;q=0.5',
-        # 'Accept-Encoding': 'gzip, deflate, br, zstd',
         'Content-Type': 'application/json',
         'X-Scope': '8a22163c-8662-4535-9050-bc5e1923df48',
         'X-Requested-With': 'XMLHttpRequest',
@@ -382,7 +359,6 @@ def timetable_years(cookies):
         'Sec-GPC': '1',
         'Connection': 'keep-alive',
         'Referer': 'https://web.skola24.se/portal/start/timetable/timetable-viewer',
-        # 'Cookie': 'ASP.NET_SessionId=llcxoerum55nvpqsu2ind0ws; TS013319cd=01b91fe1daa70b42e065d9e24952402951a73875395f2bd8ae8e743bb87f4fd62e40fe2e1962345845367584a1bbddc590b357212d7d49c250a922173d4f9aa10f5c7f987a',
         'Sec-Fetch-Dest': 'empty',
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
@@ -400,7 +376,6 @@ def timetable_timetables(cookies):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0',
         'Accept': 'application/json, text/javascript, */*; q=0.01',
         'Accept-Language': 'en-US,en;q=0.5',
-        # 'Accept-Encoding': 'gzip, deflate, br, zstd',
         'Content-Type': 'application/json',
         'X-Scope': '8a22163c-8662-4535-9050-bc5e1923df48',
         'X-Requested-With': 'XMLHttpRequest',
@@ -409,7 +384,6 @@ def timetable_timetables(cookies):
         'Sec-GPC': '1',
         'Connection': 'keep-alive',
         'Referer': 'https://web.skola24.se/portal/start/timetable/timetable-viewer',
-        # 'Cookie': 'ASP.NET_SessionId=llcxoerum55nvpqsu2ind0ws; TS013319cd=01b91fe1daa70b42e065d9e24952402951a73875395f2bd8ae8e743bb87f4fd62e40fe2e1962345845367584a1bbddc590b357212d7d49c250a922173d4f9aa10f5c7f987a',
         'Sec-Fetch-Dest': 'empty',
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
@@ -433,9 +407,6 @@ def timetable_key(cookies):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0',
         'Accept': 'application/json, text/javascript, */*; q=0.01',
         'Accept-Language': 'en-US,en;q=0.5',
-        # 'Accept-Encoding': 'gzip, deflate, br, zstd',
-        # Already added when you pass json=
-        # 'Content-Type': 'application/json',
         'X-Scope': '8a22163c-8662-4535-9050-bc5e1923df48',
         'X-Requested-With': 'XMLHttpRequest',
         'Origin': 'https://web.skola24.se',
@@ -443,7 +414,6 @@ def timetable_key(cookies):
         'Sec-GPC': '1',
         'Connection': 'keep-alive',
         'Referer': 'https://web.skola24.se/portal/start/timetable/timetable-viewer/uppsala-sso.skola24.se/',
-        # 'Cookie': 'ASP.NET_SessionId=llcxoerum55nvpqsu2ind0ws; TS013319cd=01b91fe1daa70b42e065d9e24952402951a73875395f2bd8ae8e743bb87f4fd62e40fe2e1962345845367584a1bbddc590b357212d7d49c250a922173d4f9aa10f5c7f987a',
         'Sec-Fetch-Dest': 'empty',
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
@@ -458,7 +428,6 @@ def timetable(cookies, years_data, timetables_data, key_data):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0',
         'Accept': 'application/json, text/javascript, */*; q=0.01',
         'Accept-Language': 'en-US,en;q=0.5',
-        # 'Accept-Encoding': 'gzip, deflate, br, zstd',
         'Content-Type': 'application/json',
         'X-Scope': '8a22163c-8662-4535-9050-bc5e1923df48',
         'X-Requested-With': 'XMLHttpRequest',
@@ -467,7 +436,6 @@ def timetable(cookies, years_data, timetables_data, key_data):
         'Sec-GPC': '1',
         'Connection': 'keep-alive',
         'Referer': 'https://web.skola24.se/portal/start/timetable/timetable-viewer/uppsala-sso.skola24.se/',
-        # 'Cookie': 'ASP.NET_SessionId=llcxoerum55nvpqsu2ind0ws; TS013319cd=01b91fe1daa70b42e065d9e24952402951a73875395f2bd8ae8e743bb87f4fd62e40fe2e1962345845367584a1bbddc590b357212d7d49c250a922173d4f9aa10f5c7f987a',
         'Sec-Fetch-Dest': 'empty',
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
