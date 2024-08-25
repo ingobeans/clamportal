@@ -1,12 +1,15 @@
 from request_data import *
 from requests_ntlm import HttpNtlmAuth
 from urllib.parse import unquote
-import json
+import json, datetime
 
 with open("config.json","r") as f:
     config = json.load(f)
+
 session = requests.Session()
 session.auth = HttpNtlmAuth(config["username"], config["password"])
+
+week_number = datetime.date.today().isocalendar()[1]
 
 def explore():
     while True:
@@ -63,7 +66,7 @@ timetables_data = timetables.json()
 key_data = key.json()
 print("got timetable data")
 
-timetable = timetable(skola_cookies, years_data, timetables_data, key_data)
+timetable = timetable(skola_cookies, years_data, timetables_data, key_data, week_number, 500, 500, 0)
 print("got timetable")
 
 explore()

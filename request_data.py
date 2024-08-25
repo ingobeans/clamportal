@@ -423,7 +423,7 @@ def timetable_key(cookies):
 
     return requests.post('https://web.skola24.se/api/get/timetable/render/key', cookies=cookies, headers=headers, json=json_data)
 
-def timetable(cookies, years_data, timetables_data, key_data):
+def timetable(cookies, years_data, timetables_data, key_data, week, width, height, day):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0',
         'Accept': 'application/json, text/javascript, */*; q=0.01',
@@ -448,15 +448,15 @@ def timetable(cookies, years_data, timetables_data, key_data):
         'schoolYear': years_data["data"]["activeSchoolYears"][0]["guid"],
         'startDate': None,
         'endDate': None,
-        'scheduleDay': 1,
+        'scheduleDay': day,
         'blackAndWhite': False,
-        'width': 503,
-        'height': 550,
+        'width': width,
+        'height': height,
         'selectionType': 5,
         'selection': timetables_data["data"]["getPersonalTimetablesResponse"]["studentTimetables"][0]["personGuid"],
         'showHeader': False,
         'periodText': '',
-        'week': 35,
+        'week': week,
         'year': 2024,
         'privateFreeTextMode': None,
         'privateSelectionMode': True,
