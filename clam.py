@@ -24,8 +24,8 @@ class SkolportalSession():
         portal2 = second_skolportal(self.hag_cookies)
         portal3 = third_skolportal(self.hag_cookies, session)
         print("authenticated skolportalen")
-        portal_home = home_skolportal(self.hag_cookies)
-        portal_me = me_skolportal(self.hag_cookies)
+        #portal_home = home_skolportal(self.hag_cookies)
+        #portal_me = me_skolportal(self.hag_cookies)
 
 class Skola24Session():
     def __init__(self, skolportal_session:SkolportalSession) -> None:
@@ -34,7 +34,7 @@ class Skola24Session():
         print("got skola24 session")
         skola2 = second_skola24(self.skola_cookies)
         skola3 = third_skola24(self.skola_cookies)
-        skola_login = skola24_login(self.skola_cookies)
+        #skola_login = skola24_login(self.skola_cookies)
         skola_saml1 = first_skola24_saml()
         saml_data1 = skola_saml1.text.split("lue=\"",1)[1].split("\"",1)[0]
         print("got skola24 saml data")

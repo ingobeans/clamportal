@@ -6,4 +6,4 @@ with open("config.json","r") as f:
 skolportal_session = clam.SkolportalSession(config["username"], config["password"])
 skola24_session = clam.Skola24Session(skolportal_session)
 
-print(skola24_session.get_timetable())
+skola24_session.get_timetable()
