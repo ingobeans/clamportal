@@ -1,22 +1,37 @@
-# get till entry - https://skolportal.uppsala.se/wa/auth/wil/?authmech=Elever%20och%20l%C3%A4rare%20p%C3%A5%20skolan
+# Skolportalen Authentication (requires username/password)
 
-- raw: ger hag cookies
-- med hag cookies
-- med hag cookies och ntlm (kommer som två requests p.g.a ntlm auth)
+## GET -> https://skolportal.uppsala.se/wa/auth/wil/?authmech=Elever%20och%20l%C3%A4rare%20p%C3%A5%20skolan
 
-# get till desktop - https://skolportal.uppsala.se/wa/desktop.html
+- Raw: Provides `hag_cookies`
+- With `hag_cookies`
+- With `hag_cookies` and NTLM authentication (comes as two requests due to NTLM authentication)
 
-- med hag cookies
+# Skola24 Authentication (requires Skolportalen `hag_cookies`)
 
-# skippa asset requests
+## GET -> https://uppsala-sso.skola24.se/
 
-# get till me - https://skolportal.uppsala.se/https/api/rest/v1.0/me
+- Raw: Provides `skola_cookies`
 
-- med hag cookies
+## GET -> https://skolportal.uppsala.se/?c=1
 
-### dokumentering för me json responsen: https://da27.qa.go.nexusgroup.com/api/xpirest/endpoints/me.html
+- With `skola_cookies`
 
-# post till me attributes - https://skolportal.uppsala.se/https/api/rest/v1.0/me/attributes
+## GET -> https://skolportal.uppsala.se/
 
-- med hag cookies
-- json data
+- With `skola_cookies`
+
+## GET -> https://service-sso1.novasoftware.se/saml-2.0/authenticate?customer=https%3a%2f%2fskolfederation.uppsala.se%2fidp&targetsystem=Skola24
+
+- Raw: Provides `saml_data1`
+
+## POST -> https://skolfederation.uppsala.se/wa/auth/saml/
+
+- With `hag_cookies` and `saml_data1`: Provides `saml_data`
+
+## POST -> https://service-sso1.novasoftware.se/saml-2.0/response
+
+- With `saml_data2`: Provides `sign_in_url`
+
+## GET -> `sign_in_url`
+
+- With `skola_cookies`
