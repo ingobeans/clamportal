@@ -24,7 +24,16 @@ class SkolportalSession():
         portal3 = third_skolportal(self.hag_cookies, session)
         print("authenticated skolportalen")
         #portal_home = home_skolportal(self.hag_cookies)
-        #portal_me = me_skolportal(self.hag_cookies)
+    def get_user_info(self) -> json:
+        return me_skolportal(self.hag_cookies).json()
+    def get_user_attributes(self) -> dict:
+        return self.get_user_info()["attributes"]
+    def set_user_attributes(self, attributes:dict) -> None:
+        if len(json.dumps(attributes)) > 4102:
+            raise ValueError(f"Attributes data too large! Max 4102 characters")
+        request = set_me_attributes_skolportal(self.hag_cookies, attributes)
+        if request.status_code != 204:
+            raise ValueError(f"Attributes not allowed, status code {request.status_code}\n\n{request.text}")
 
 class Skola24Session():
     def __init__(self, skolportal_session:SkolportalSession) -> None:
