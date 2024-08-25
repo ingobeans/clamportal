@@ -1,5 +1,6 @@
 from request_data import *
 from requests_ntlm import HttpNtlmAuth
+from urllib.parse import unquote
 import json
 
 with open("config.json","r") as f:
@@ -25,15 +26,34 @@ def parse_cookies(cookie_header: str) -> dict:
         cookies[key] = value
     return cookies
 
-s1 = first_skolportal()
-hag_cookies = parse_cookies(s1.headers["Set-Cookie"])
-s2 = second_skolportal(hag_cookies)
-s3 = third_skolportal(hag_cookies, session)
-hs = home_skolportal(hag_cookies)
-me = me_skolportal(hag_cookies)
-sm = set_me_attributes_skolportal(hag_cookies, {
-   "plugin-splash-color":"#008000",
-   "plugin-splash-text":"howdy !!",
-   "hello hello hello":"can anybody hear me?"
-})
+portal1 = first_skolportal()
+hag_cookies = parse_cookies(portal1.headers["Set-Cookie"])
+portal2 = second_skolportal(hag_cookies)
+portal3 = third_skolportal(hag_cookies, session)
+portal_home = home_skolportal(hag_cookies)
+portal_me = me_skolportal(hag_cookies)
+#portal_set_me = set_me_attributes_skolportal(hag_cookies, {
+#   "plugin-splash-color":"#008000",
+#   "plugin-splash-text":"howdy !!",
+#   "hello hello hello":"can anybody hear me?"
+#})
+#
+skola1 = first_skola24()
+skola_cookies = parse_cookies(skola1.headers["Set-Cookie"])
+skola2 = second_skola24(skola_cookies)
+skola3 = third_skola24(skola_cookies)
+skola_login = skola24_login(skola_cookies)
+skola_saml1 = first_skola24_saml()
+saml_data1 = skola_saml1.text.split("lue=\"",1)[1].split("\"",1)[0]
+skola_saml2 = second_skola24_saml(hag_cookies, saml_data1)
+saml_data2 = skola_saml2.text.split("lue=\"",1)[1].split("\"",1)[0]
+skola_saml3 = third_skola24_saml(saml_data2)
+sign_in_url = unquote(skola_saml3.headers["Location"])
+# load timetable
+years = timetable_years(skola_cookies)
+timetables = timetable_timetables(skola_cookies)
+key = timetable_key(skola_cookies)
+
+#timetable = timetable(skola_cookies, years_data, timetables_data, key_data)
+
 explore()
