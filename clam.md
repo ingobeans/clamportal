@@ -13,3 +13,5 @@
 # me request - https://skolportal.uppsala.se/https/api/rest/v1.0/me
 
 - med hag cookies
+
+### dokumentering för me json responsen: https://da27.qa.go.nexusgroup.com/api/xpirest/endpoints/me.html

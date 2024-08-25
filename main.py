@@ -31,4 +31,9 @@ s2 = second_skolportal(hag_cookies)
 s3 = third_skolportal(hag_cookies, session)
 hs = home_skolportal(hag_cookies)
 me = me_skolportal(hag_cookies)
+sm = set_me_attributes_skolportal(hag_cookies, {
+   "plugin-splash-color":"#008000",
+   "plugin-splash-text":"howdy !!",
+   "hello hello hello":"can anybody hear me?"
+})
 explore()

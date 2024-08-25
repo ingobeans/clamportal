@@ -1,4 +1,4 @@
-import requests, urllib3
+import requests, urllib3, json
 
 urllib3.disable_warnings(category=urllib3.exceptions.InsecureRequestWarning)
 
@@ -120,3 +120,10 @@ def me_skolportal(cookies):
     }
 
     return requests.get('https://skolportal.uppsala.se/https/api/rest/v1.0/me', cookies=cookies, headers=headers, verify=False, allow_redirects=False)
+
+def set_me_attributes_skolportal(cookies, attributes):
+    headers = {
+        'Content-Type': 'application/json',
+    }
+
+    return requests.post('https://skolportal.uppsala.se/https/api/rest/v1.0/me/attributes', cookies=cookies, headers=headers, data=json.dumps(attributes), verify=False, allow_redirects=False)
