@@ -49,11 +49,17 @@ skola_saml2 = second_skola24_saml(hag_cookies, saml_data1)
 saml_data2 = skola_saml2.text.split("lue=\"",1)[1].split("\"",1)[0]
 skola_saml3 = third_skola24_saml(saml_data2)
 sign_in_url = unquote(skola_saml3.headers["Location"])
+skola_signin = skola24_signin(sign_in_url.split("?t=",1)[1], skola_cookies)
 # load timetable
+#skola_info = skola24_info(skola_cookies)
 years = timetable_years(skola_cookies)
 timetables = timetable_timetables(skola_cookies)
 key = timetable_key(skola_cookies)
 
-#timetable = timetable(skola_cookies, years_data, timetables_data, key_data)
+years_data = years.json()
+timetables_data = timetables.json()
+key_data = key.json()
+
+timetable = timetable(skola_cookies, years_data, timetables_data, key_data)
 
 explore()

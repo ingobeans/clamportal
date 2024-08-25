@@ -319,6 +319,55 @@ def third_skola24_saml(saml_data):
 
     return requests.post('https://service-sso1.novasoftware.se/saml-2.0/response', headers=headers, data=data, allow_redirects=False)
 
+def skola24_signin(t, cookies):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+        # 'Accept-Encoding': 'gzip, deflate, br, zstd',
+        'Referer': 'https://skolfederation.uppsala.se/',
+        'DNT': '1',
+        'Sec-GPC': '1',
+        'Connection': 'keep-alive',
+        # 'Cookie': 'ASP.NET_SessionId=llcxoerum55nvpqsu2ind0ws; TS013319cd=01b91fe1daa70b42e065d9e24952402951a73875395f2bd8ae8e743bb87f4fd62e40fe2e1962345845367584a1bbddc590b357212d7d49c250a922173d4f9aa10f5c7f987a',
+        'Upgrade-Insecure-Requests': '1',
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'cross-site',
+        'Priority': 'u=0, i',
+    }
+
+    params = {
+        't': t,
+    }
+
+    return requests.get('https://web.skola24.se/sign-in', params=params, cookies=cookies, headers=headers)
+
+def skola24_info(cookies):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0',
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Accept-Language': 'en-US,en;q=0.5',
+        # 'Accept-Encoding': 'gzip, deflate, br, zstd',
+        # Already added when you pass json=
+        # 'Content-Type': 'application/json',
+        'X-Scope': 'a0b6c9c4-11d7-4a52-a030-a55a15058eef',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Origin': 'https://web.skola24.se',
+        'DNT': '1',
+        'Sec-GPC': '1',
+        'Connection': 'keep-alive',
+        'Referer': 'https://web.skola24.se/portal/start/',
+        # 'Cookie': 'ASP.NET_SessionId=llcxoerum55nvpqsu2ind0ws; TS013319cd=01b91fe1daa70b42e065d9e24952402951a73875395f2bd8ae8e743bb87f4fd62e40fe2e1962345845367584a1bbddc590b357212d7d49c250a922173d4f9aa10f5c7f987a',
+        'Sec-Fetch-Dest': 'empty',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'same-origin',
+    }
+
+    json_data = None
+
+    return requests.post('https://web.skola24.se/api/get/user/info', cookies=cookies, headers=headers, json=json_data)
+
 def timetable_years(cookies):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0',
@@ -427,8 +476,8 @@ def timetable(cookies, years_data, timetables_data, key_data):
     json_data = {
         'renderKey': key_data["data"]["key"],
         'host': 'uppsala-sso.skola24.se',
-        'unitGuid': timetables_data["data"]["getPersonalTimetablesResponse"]["studentTimetables"]["unitGuid"],
-        'schoolYear': years_data["data"]["activeSchoolYears"]["guid"],
+        'unitGuid': timetables_data["data"]["getPersonalTimetablesResponse"]["studentTimetables"][0]["unitGuid"],
+        'schoolYear': years_data["data"]["activeSchoolYears"][0]["guid"],
         'startDate': None,
         'endDate': None,
         'scheduleDay': 1,
@@ -436,7 +485,7 @@ def timetable(cookies, years_data, timetables_data, key_data):
         'width': 503,
         'height': 550,
         'selectionType': 5,
-        'selection': timetables_data["data"]["getPersonalTimetablesResponse"]["studentTimetables"]["personGuid"],
+        'selection': timetables_data["data"]["getPersonalTimetablesResponse"]["studentTimetables"][0]["personGuid"],
         'showHeader': False,
         'periodText': '',
         'week': 35,
