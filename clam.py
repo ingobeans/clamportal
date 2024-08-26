@@ -52,7 +52,7 @@ class Skola24Session():
         sign_in_url = unquote(skola_saml3.headers["Location"])
         skola_signin = skola24_signin(sign_in_url.split("?t=",1)[1], self.skola_cookies)
         print("signed in to skola24")
-    def get_timetable(self, week_number, width, height, day)->dict:
+    def get_timetable(self, week_number, width, height, day, year)->dict:
         years = timetable_years(self.skola_cookies)
         timetables = timetable_timetables(self.skola_cookies)
         key = timetable_key(self.skola_cookies)
