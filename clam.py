@@ -8,8 +8,6 @@ def parse_cookies(cookie_header: str) -> dict:
     for cookie in cookie_pairs:
         key_value_pair = cookie.split(';', 1)[0]
         key, value = key_value_pair.split('=', 1)
-        
-        
         cookies[key] = value
     return cookies
 
