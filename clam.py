@@ -8,8 +8,6 @@ def parse_cookies(cookie_header: str) -> dict:
     for cookie in cookie_pairs:
         key_value_pair = cookie.split(';', 1)[0]
         key, value = key_value_pair.split('=', 1)
-        
-        
         cookies[key] = value
     return cookies
 
@@ -22,6 +20,8 @@ class SkolportalSession():
         print("got skolportalen session")
         portal2 = second_skolportal(self.hag_cookies)
         portal3 = third_skolportal(self.hag_cookies, session)
+        if portal3.status_code == 401:
+            raise ValueError("Invalid credentials")
         print("authenticated skolportalen")
         #portal_home = home_skolportal(self.hag_cookies)
     def get_user_info(self) -> json:
