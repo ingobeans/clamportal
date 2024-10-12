@@ -29,6 +29,9 @@ class SkolportalSession():
     def get_user_attributes(self) -> dict:
         return self.get_user_info()["attributes"]
     def set_user_attributes(self, attributes:dict) -> None:
+        for key in attributes:
+            if len(key) + len(attributes[key]) > 4094:
+                raise ValueError(f"Attribute key {key} is too large. The text length of a key + its value can't be over 4094")
         request = set_me_attributes_skolportal(self.hag_cookies, attributes)
         if request.status_code != 204:
             raise ValueError(f"Attributes not allowed, status code {request.status_code}\n\n{request.text}")
