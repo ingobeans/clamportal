@@ -30,11 +30,13 @@ def me_skolportal(cookies):
     return requests.get('https://skolportal.uppsala.se/https/api/rest/v1.0/me', cookies=cookies, verify=False, allow_redirects=False)
 
 def set_me_attributes_skolportal(cookies, attributes):
+    if type(attributes) != str:
+        attributes = json.dumps(attributes)
     headers = {
         'Content-Type': 'application/json',
     }
 
-    return requests.post('https://skolportal.uppsala.se/https/api/rest/v1.0/me/attributes', cookies=cookies, headers=headers, data=json.dumps(attributes), verify=False, allow_redirects=False)
+    return requests.post('https://skolportal.uppsala.se/https/api/rest/v1.0/me/attributes', cookies=cookies, headers=headers, data=attributes, verify=False, allow_redirects=False)
 
 def first_skola24():
     return requests.get('https://uppsala-sso.skola24.se/', verify=False, allow_redirects=False)

@@ -29,10 +29,15 @@ class SkolportalSession():
     def get_user_attributes(self) -> dict:
         return self.get_user_info()["attributes"]
     def set_user_attributes(self, attributes:dict) -> None:
-        for key in attributes:
-            if len(key) + len(attributes[key]) > 4094:
+        data = json.dumps(attributes)
+        for key, value in json.loads(data).items():
+            if not type(value) in [str,bool,int,float] and value != None:
+                raise ValueError(f"Attribute {key}'s value isn't of type str, int, float, bool or None.")
+            key = str(key)
+            value = str(value)
+            if len(key) + len(value) > 4094:
                 raise ValueError(f"Attribute key {key} is too large. The text length of a key + its value can't be over 4094")
-        request = set_me_attributes_skolportal(self.hag_cookies, attributes)
+        request = set_me_attributes_skolportal(self.hag_cookies, data)
         if request.status_code != 204:
             raise ValueError(f"Attributes not allowed, status code {request.status_code}\n\n{request.text}")
 
