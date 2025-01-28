@@ -28,16 +28,17 @@ class SkolportalSession():
         return me_skolportal(self.hag_cookies).json()
     def get_user_attributes(self) -> dict:
         return self.get_user_info()["attributes"]
-    def set_user_attributes(self, attributes:dict) -> None:
-        data = json.dumps(attributes)
-        for key, value in json.loads(data).items():
+    def set_user_attributes(self, attributes:dict|str) -> None:
+        if type(attributes) == str:
+            attributes = json.loads(attributes)
+        for key, value in attributes.items():
             if not type(value) in [str,bool,int,float] and value != None:
                 raise ValueError(f"Attribute {key}'s value isn't of type str, int, float, bool or None.")
             key = str(key)
             value = str(value)
             if len(key) + len(value) > 4094:
                 raise ValueError(f"Attribute key {key} is too large. The text length of a key + its value can't be over 4094")
-        request = set_me_attributes_skolportal(self.hag_cookies, data)
+        request = set_me_attributes_skolportal(self.hag_cookies, json.dumps(attributes))
         if request.status_code != 204:
             raise ValueError(f"Attributes not allowed, status code {request.status_code}\n\n{request.text}")
 
@@ -71,6 +72,6 @@ class Skola24Session():
         timetables_data = timetables.json()
         key_data = key.json()
         print("got timetable data")
-        timetable_data = timetable(self.skola_cookies, years_data, timetables_data, key_data, week_number, width, height, day)
+        timetable_data = timetable(self.skola_cookies, years_data, timetables_data, key_data, week_number, width, height, day, year)
         print("got timetable")
         return timetable_data.json()
