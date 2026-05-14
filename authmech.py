@@ -26,6 +26,7 @@ def login_authmech_school(username,password)->dict:
 
 def login_authmech_microsoft(email,password)->dict:
     options = Options()
+    options.add_argument("--headless=new")
     options.add_experimental_option("detach", True)
     driver = webdriver.Chrome(options)
 
