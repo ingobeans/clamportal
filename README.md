@@ -11,3 +11,5 @@ clam.py innehåller själva library:t, medans main.py är exempelanvändning
 clamportal har två authmechs, en för "Elever och lärare på skolan" (tillgängliga via Authmechs.AT_SCHOOL), samt "Elever och lärare (Prova gärna!)" (tillgänglig via Authmechs.MICROSOFT).
 
 Authmechs.MICROSOFT använder selenium, medan Authmechs.AT_SCHOOL endast använder requests för att simulera en inloggning.
+
+Authmechs.MICROSOFT behöver skolmailen som användarnamn (ex: namn.eftername@skola.uppsala.se), medan Authmechs.AT_SCHOOL använder själva användarnamnet (ex: usrnam9)
