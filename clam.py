@@ -2,6 +2,8 @@ from request_data import *
 from requests_ntlm import HttpNtlmAuth
 from urllib.parse import unquote
 
+from authmech import *
+
 def parse_cookies(cookie_header: str) -> dict:
     cookies = {}
     cookie_pairs = cookie_header.split(', ')
@@ -11,18 +13,16 @@ def parse_cookies(cookie_header: str) -> dict:
         cookies[key] = value
     return cookies
 
+
 class SkolportalSession():
-    def __init__(self, username, password) -> None:
-        session = requests.Session()
-        session.auth = HttpNtlmAuth(username, password)
-        portal1 = first_skolportal()
-        self.hag_cookies = parse_cookies(portal1.headers["Set-Cookie"])
-        print("got skolportalen session")
-        portal2 = second_skolportal(self.hag_cookies)
-        portal3 = third_skolportal(self.hag_cookies, session)
-        if portal3.status_code == 401:
-            raise ValueError("Invalid credentials")
-        print("authenticated skolportalen")
+    def __init__(self, username, password, authmech: Authmech) -> None:
+        if authmech == Authmech.AT_SCHOOL:
+            self.hag_cookies = login_authmech_school(username,password)
+        elif authmech == Authmech.MICROSOFT:
+            self.hag_cookies = login_authmech_microsoft(username,password)
+        else:
+            raise ValueError("Unknown Authmech")
+
         #portal_home = home_skolportal(self.hag_cookies)
     def get_user_info(self) -> json:
         return me_skolportal(self.hag_cookies).json()
