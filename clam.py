@@ -15,13 +15,12 @@ def parse_cookies(cookie_header: str) -> dict:
 
 
 class SkolportalSession():
-    def __init__(self, username, password, authmech: Authmech) -> None:
-        if authmech == Authmech.AT_SCHOOL:
-            self.hag_cookies = login_authmech_school(username,password)
-        elif authmech == Authmech.MICROSOFT:
-            self.hag_cookies = login_authmech_microsoft(username,password)
-        else:
-            raise ValueError("Unknown Authmech")
+    def __init__(self, cookies:dict) -> None:
+        """Construct a SkolportalSession from valid logged in cookies.
+
+        Cookies can be gotten through either `login_authmech_microsoft` or `login_authmech_school`
+        """
+        self.hag_cookies = cookies
 
         #portal_home = home_skolportal(self.hag_cookies)
     def get_user_info(self) -> json:

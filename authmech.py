@@ -7,11 +7,9 @@ from selenium.webdriver.support import expected_conditions as ec
 
 import clam
 
-class Authmech:
-    AT_SCHOOL=0
-    MICROSOFT=1
-
 def login_authmech_school(username,password)->dict:
+    """Attempt login with the "At School" authmech
+    """
     session = requests.Session()
     session.auth = HttpNtlmAuth(username, password)
     portal1 = first_skolportal()
@@ -24,11 +22,25 @@ def login_authmech_school(username,password)->dict:
     print("authenticated skolportalen")
     return hag_cookies
 
-def login_authmech_microsoft(email,password)->dict:
+def login_authmech_microsoft(email,password,backend="chrome",persistent_login_cache_location=None)->dict:
+    """Attempt login with Microsoft Authmech
+
+    `backend` can be either: `chrome` or `firefox`.
+    `persistent_login_cache_location` can be set to stay logged in, to make future logins faster.
+    """
     options = Options()
     options.add_argument("--headless=new")
-    options.add_experimental_option("detach", True)
-    driver = webdriver.Chrome(options)
+
+    if backend == "chrome":
+        if persistent_login_cache_location:
+            options.add_argument(f"user-data-dir={persistent_login_cache_location}")
+        driver = webdriver.Chrome(options)
+    elif backend == "firefox":
+        if persistent_login_cache_location:
+            options.profile = persistent_login_cache_location
+        driver = webdriver.Firefox(options)
+    else:
+        raise ValueError("Unrecognized backend")
 
     driver.get("https://skolportal.uppsala.se/wa/auth?authmech=uf9yulgic7b4")
 
