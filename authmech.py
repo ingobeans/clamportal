@@ -29,8 +29,7 @@ def login_authmech_microsoft(email,password,backend="chrome",persistent_login_ca
     `persistent_login_cache_location` can be set to stay logged in, to make future logins faster.
     """
     options = Options()
-    options.add_experimental_option("detach", True)
-    #options.add_argument("--headless=new")
+    options.add_argument("--headless=new")
 
     if backend == "chrome":
         if persistent_login_cache_location:
