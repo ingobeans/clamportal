@@ -29,7 +29,8 @@ def login_authmech_microsoft(email,password,backend="chrome",persistent_login_ca
     `persistent_login_cache_location` can be set to stay logged in, to make future logins faster.
     """
     options = Options()
-    options.add_argument("--headless=new")
+    options.add_experimental_option("detach", True)
+    #options.add_argument("--headless=new")
 
     if backend == "chrome":
         if persistent_login_cache_location:
@@ -46,21 +47,25 @@ def login_authmech_microsoft(email,password,backend="chrome",persistent_login_ca
 
     wait = WebDriverWait(driver, 5)
 
-    email_element = wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, "input[type=email]")))
-    email_element.send_keys(email)
-    wait.until(ec.element_to_be_clickable((By.CLASS_NAME, "win-button"))).click()
-    
-    password_element = wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, "input[type=password]")))
-    password_element.send_keys(password)
-    wait.until(ec.element_to_be_clickable((By.CSS_SELECTOR, ".win-button[value=\"Sign in\"]"))).click()
-    
+    # figure out if microsoft login is required or if already logged in
+    start_wait = wait.until(lambda driver :  "desktop.html" in driver.current_url or ec.presence_of_element_located((By.CSS_SELECTOR, "input[type=email]"))(driver) )
+    if not "desktop.html" in driver.current_url:
+        print("not already logged in, attempting log in now.")
+        email_element = driver.find_element(By.CSS_SELECTOR, "input[type=email]")
+        email_element.send_keys(email)
+        wait.until(ec.element_to_be_clickable((By.CLASS_NAME, "win-button"))).click()
+        
+        password_element = wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, "input[type=password]")))
+        password_element.send_keys(password)
+        wait.until(ec.element_to_be_clickable((By.CSS_SELECTOR, ".win-button[value=\"Sign in\"]"))).click()
+        
 
-    try:
-        wait.until(ec.element_to_be_clickable((By.CSS_SELECTOR, ".win-button[value=\"Yes\"]"))).click()
-        wait.until(ec.url_contains("desktop.html"))
-    except:
-        raise ValueError("Invalid credentials using Microsoft Authmech")
+        try:
+            wait.until(ec.element_to_be_clickable((By.CSS_SELECTOR, ".win-button[value=\"Yes\"]"))).click()
+            wait.until(ec.url_contains("desktop.html"))
+        except:
+            raise ValueError("Invalid credentials using Microsoft Authmech")
     cookies = {key: driver.get_cookie(key)["value"] for key in ["WAAK_HAG_SN","WASID_HAG_SN"]}
-    #driver.close()
+    driver.close()
     return cookies
     

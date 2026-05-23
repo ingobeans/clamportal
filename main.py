@@ -5,10 +5,9 @@ with open("config.json","r") as f:
 
 
 skolportal_session = clam.SkolportalSession(clam.login_authmech_microsoft(config["username"], config["password"]))
-print("yay")
-#skola24_session = clam.Skola24Session(skolportal_session)
-#
-#print(skola24_session.get_timetable(18,600,600,1,2026))
-#last = None
-#while True:
-#    last = eval(input(">"))
+skola24_session = clam.Skola24Session(skolportal_session)
+
+print(skola24_session.get_timetable(18,600,600,1,2026))
+last = None
+while True:
+    last = eval(input(">"))
