@@ -52,11 +52,3 @@ def login_authmech_microsoft(email,password)->dict:
     #driver.close()
     return cookies
     
-    
-
-if __name__ == "__main__":
-    with open("config.txt","r") as f:
-        config = f.read().split("\n")
-        username = config[0]
-        password = config[1]
-    login(username,password)
